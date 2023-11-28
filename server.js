@@ -8,7 +8,7 @@ const io = new Server(server)
 
 const port = 3000
 
-app.set('view engine', 'pug')
+app.set('view engine', 'ejs')
 app.get('/', (req, res) => {
   res.render('index', {title: "Forum Diskusi"})
 })
