@@ -16,10 +16,13 @@
     </div>
     
     <div class="container1 w-100 mt-4  m-2" style="height: auto; " id="chatContainer" >
+        <h1>Chat</h1>
         <form id="chat" style="display: contents;">
-            <div id="message-list" style="height: 400px; margin: auto;" class="border w-25">
+            <div class="div">
+            <div id="message-list" style="height: 400px; margin: auto; border: solid black 30px;" class="border w-25">
 
             </div>
+        </div>
             <input type="text" class="form-control mt-2 w-25  " style="margin: auto;" id="message">
             <input type="submit" value="Kirim" class="btn btn-secondary mt-2 w-25" id="send">
         </form>
@@ -52,19 +55,33 @@
                     message : message.value
                 }
                 socket.emit("message", data) 
+                let container = document.createElement('div')
                 let chatList = document.createElement('p')
-                chatList.style.fontSize = "22px"
+                chatList.style.fontSize = "18px"
                 chatList.style.textAlign = "left"
+                container.style.backgroundColor = "green"
+                container.style.width = "40%"
+                chatList.style.color = "white"
+                chatList.style.fontFamily = "arial"
+                container.style.marginLeft = "5px"
+                chatList.style.marginLeft = "5px"
+                container.style.borderRadius = "10px 0px 10px 0px"
                 chatList.textContent = message.value
-                messageList.appendChild(chatList)
+                messageList.appendChild(container)
+                container.appendChild(chatList)
                 message.value = ""
             }
         })
         socket.on("message", (id, message) => {
+            let profil = document.createElement('p')
             let broadcast = document.createElement('p')
+            profil.style.fontSize = "10px"
+            profil.style.textAlign = "right"
             broadcast.style.fontSize = "22px"
             broadcast.style.textAlign = "right"
-            broadcast.textContent = `${message} ${id}`
+            profil.textContent = id
+            broadcast.textContent = message
+            messageList.appendChild(profil)
             messageList.appendChild(broadcast)
         })
     </script>
