@@ -14,9 +14,10 @@ app.get('/', (req, res) => {
 })
 
 io.on("connection", (socket) => {
-    socket.on("message", (data) =>
-    console.log("data =>", (data)))
-    socket.broadcast.emit("message", data)
+    socket.on("message", (data) => {
+      const { id, message } = data
+      socket.broadcast.emit("message", id, message)
+    })
 })
 
 server.listen(port, () => {
